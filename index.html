@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sienada Cakery | A Little Window, A Lot of Happiness</title>
+<style>
+:root {
+  --cream:#f8f1e7;
+  --mocha:#9b765d;
+  --brown:#513c32;
+  --maroon:#702d3c;
+  --white:#fffdf9;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--brown);
+  font-family:Arial,sans-serif;
+}
+header{
+  background:var(--brown);
+  color:var(--cream);
+  text-align:center;
+  padding:28px 16px;
+}
+header h1{
+  font-family:Georgia,serif;
+  font-size:30px;
+  margin:0 0 8px;
+  letter-spacing:1px;
+}
+header p{margin:0;font-size:12px;letter-spacing:2px}
+nav{
+  background:var(--white);
+  padding:12px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:5;
+  box-shadow:0 2px 8px #0001;
+}
+nav a{
+  color:var(--brown);
+  text-decoration:none;
+  font-size:13px;
+  margin:0 8px;
+}
+.hero{
+  text-align:center;
+  padding:45px 20px;
+  background:#ead9c8;
+}
+.hero .small{
+  letter-spacing:3px;
+  font-size:11px;
+}
+.hero h2{
+  font-family:Georgia,serif;
+  font-size:32px;
+  margin:12px 0;
+}
+.hero p{line-height:1.7;font-size:14px}
+.section{
+  max-width:850px;
+  margin:auto;
+  padding:28px 16px;
+}
+.section h2{
+  font-family:Georgia,serif;
+  text-align:center;
+  color:var(--maroon);
+  margin:5px 0 8px;
+}
+.subtitle{
+  text-align:center;
+  font-size:13px;
+  margin-bottom:24px;
+}
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:14px;
+}
+.product{
+  background:var(--white);
+  border:1px solid #e2d2c2;
+  border-radius:13px;
+  padding:16px;
+}
+.product h3{
+  color:var(--maroon);
+  font-family:Georgia,serif;
+  margin:0 0 8px;
+}
+.product p{
+  font-size:13px;
+  line-height:1.6;
+  min-height:40px;
+}
+.product label{
+  display:block;
+  font-size:12px;
+  margin:10px 0 5px;
+  font-weight:bold;
+}
+.product select,.product input{
+  width:100%;
+  padding:10px;
+  border:1px solid #d5c3b2;
+  border-radius:7px;
+  background:white;
+  color:var(--brown);
+}
+.add{
+  width:100%;
+  margin-top:12px;
+  border:0;
+  border-radius:7px;
+  padding:12px;
+  background:var(--maroon);
+  color:white;
+  font-weight:bold;
+}
+.cart{
+  background:var(--white);
+  border:1px solid #ddcbbb;
+  border-radius:13px;
+  padding:18px;
+}
+.cart-item{
+  border-bottom:1px solid #eee2d8;
+  padding:10px 0;
+  font-size:13px;
+  line-height:1.6;
+}
+.remove{
+  color:var(--maroon);
+  border:0;
+  background:none;
+  text-decoration:underline;
+  padding:5px 0;
+}
+.total{
+  font-size:20px;
+  font-weight:bold;
+  text-align:right;
+  margin:18px 0;
+}
+.checkout{
+  display:block;
+  background:#267448;
+  color:white;
+  text-decoration:none;
+  text-align:center;
+  padding:15px;
+  border-radius:8px;
+  font-weight:bold;
+}
+.empty{text-align:center;color:#88796e;font-size:13px}
+.info{
+  background:#ead9c8;
+  border-radius:12px;
+  padding:20px;
+  text-align:center;
+  font-size:13px;
+  line-height:1.8;
+}
+footer{
+  background:var(--brown);
+  color:var(--cream);
+  text-align:center;
+  padding:25px 15px;
+  font-size:12px;
+  line-height:1.8;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SIENADA CAKERY</h1>
+  <p>A LITTLE WINDOW, A LOT OF HAPPINESS</p>
+</header>
+
+<nav>
+  <a href="#menu">Menu</a>
+  <a href="#order">Keranjang</a>
+  <a href="#contact">Kontak</a>
+</nav>
+
+<section class="hero">
+  <div class="small">WELCOME TO OUR LITTLE BAKERY</div>
+  <h2>Sweet Moments Begin Here</h2>
+  <p>Dibuat dengan cinta, disajikan dengan rasa bahagia.<br>
+  Temukan camilan favoritmu di Sienada Cakery.</p>
+</section>
+
+<section class="section" id="menu">
+  <h2>Our Menu</h2>
+  <div class="subtitle">Pilih produk, varian, dan jumlah pesananmu.</div>
+  <div class="products" id="products"></div>
+</section>
+
+<section class="section" id="order">
+  <h2>Your Shopping Cart</h2>
+  <div class="subtitle">Periksa pesanan sebelum checkout.</div>
+  <div class="cart">
+    <div id="cartList">
+      <p class="empty">Keranjang masih kosong.</p>
+    </div>
+    <div class="total" id="total">Total: Rp0</div>
+    <a class="checkout" href="#" onclick="checkout(event)">
+      PESAN SEKARANG VIA WHATSAPP
+    </a>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <h2>Visit & Contact Us</h2>
+  <div class="info">
+    <b>SIENADA CAKERY</b><br>
+    A Little Window, A Lot of Happiness<br>
+    Instagram: @sienada_cakery<br>
+    WhatsApp: 085608557613<br><br>
+    Informasi lokasi dan pengambilan pesanan<br>
+    dapat dikonfirmasi melalui WhatsApp.
+  </div>
+</section>
+
+<footer>
+  SIENADA CAKERY<br>
+  Made with love in every bite ♡<br>
+  © 2026 Sienada Cakery
+</footer>
+
+<script>
+const WA_NUMBER = "6285608557613";
+
+const menu = [
+{
+ name:"Donat Glaze",
+ desc:"Donat lembut dengan pilihan glaze dan topping favorit.",
+ unit:"paket",
+ options:[
+  ["Paket A - 2 pcs",6000],
+  ["Paket B - 4 pcs",10000],
+  ["Paket C - 6 pcs",15000],
+  ["Paket D - 12 pcs",30000]
+ ],
+ note:"Rasa glaze dan topping"
+},
+{
+ name:"Donat Tabur Susu",
+ desc:"Dancow, coklat, matcha, strawberry, cinnamon sugar, cookies n cream, redvelvet cookies n cream, taro.",
+ unit:"pcs",
+ min:1,
+ options:[["Semua varian - Rp2.250/pcs",2250]],
+ note:"Tuliskan rasa dan jumlah masing-masing"
+},
+{
+ name:"Bomboloni",
+ desc:"Bomboloni isi lembut. Minimal 2 pcs dan kelipatan 2.",
+ unit:"pcs",
+ min:2,
+ step:2,
+ options:[
+  ["Varian Rp2.750/pcs",2750],
+  ["Varian Rp3.250/pcs",3250]
+ ],
+ note:"Tuliskan rasa dan jumlah masing-masing"
+},
+{
+ name:"Donat Abon",
+ desc:"Donat gurih dengan taburan abon.",
+ unit:"paket",
+ options:[
+  ["2 pcs",7000],
+  ["4 pcs",14000],
+  ["6 pcs",21000],
+  ["12 pcs",42000]
+ ],
+ note:"Catatan pesanan"
+},
+{
+ name:"Donat Salju",
+ desc:"Donat lembut dengan taburan gula salju.",
+ unit:"paket",
+ options:[
+  ["6 pcs",7500],
+  ["10 pcs",12500],
+  ["15 pcs",20000],
+  ["20 pcs",25000]
+ ],
+ note:"Catatan pesanan"
+},
+{
+ name:"Bolen Pisang",
+ desc:"Bolen dengan pilihan pisang coklat, keju, coklat-keju, dan matcha. Minimal 5 pcs, boleh mix.",
+ unit:"pcs",
+ min:5,
+ options:[
+  ["Pisang coklat - Rp2.500/pcs",2500],
+  ["Pisang keju - Rp2.500/pcs",2500],
+  ["Pisang coklat-keju - Rp3.000/pcs",3000],
+  ["Pisang matcha - Rp3.000/pcs",3000]
+ ],
+ note:"Tuliskan varian dan jumlah masing-masing"
+},
+{
+ name:"Choux Au Craquelin",
+ desc:"Kulit craquelin renyah dengan isian cream lembut.",
+ unit:"paket",
+ options:[
+  ["Vanilla - 3 pcs",10000],
+  ["Vanilla - 6 pcs",19000],
+  ["Vanilla - 9 pcs",28000],
+  ["Chocolate - 3 pcs",11000],
+  ["Chocolate - 6 pcs",20000],
+  ["Chocolate - 9 pcs",29000],
+  ["Mix - 6 pcs",20000],
+  ["Mix - 9 pcs",29000]
+ ],
+ note:"Catatan rasa atau pesanan"
+},
+{
+ name:"Fudgy Brownies Bites",
+ desc:"Brownies fudgy dengan pilihan topping keju, chocochips, Oreo, dan almond.",
+ unit:"pcs",
+ min:1,
+ options:[["1 pcs - Rp2.500",2500]],
+ note:"Tuliskan topping dan jumlah masing-masing"
+}
+];
+
+let cart = [];
+
+function rupiah(n){
+ return "Rp"+n.toLocaleString("id-ID");
+}
+
+function showProducts(){
+ const area=document.getElementById("products");
+ area.innerHTML=menu.map((p,i)=>`
+ <article class="product">
+  <h3>${p.name}</h3>
+  <p>${p.desc}</p>
+  <label>Pilih varian</label>
+  <select id="option${i}">
+   ${p.options.map((o,j)=>`
+    <option value="${j}">${o[0]} — ${rupiah(o[1])}</option>
+   `).join("")}
+  </select>
+  <label>Jumlah (${p.unit})</label>
+  <input id="qty${i}" type="number"
+   min="${p.min||1}" step="${p.step||1}" value="${p.min||1}">
+  <label>${p.note}</label>
+  <input id="note${i}" type="text" placeholder="Contoh: coklat 2, vanilla 2">
+  <button class="add" onclick="addCart(${i})">
+   + TAMBAHKAN
+  </button>
+ </article>
+ `).join("");
+}
+
+function addCart(i){
+ const p=menu[i];
+ const optionIndex=Number(document.getElementById("option"+i).value);
+ const option=p.options[optionIndex];
+ const qty=Number(document.getElementById("qty"+i).value);
+ const note=document.getElementById("note"+i).value.trim();
+
+ if(!Number.isInteger(qty)||qty<(p.min||1)||
+    qty%(p.step||1)!==0){
+  alert("Jumlah pesanan belum sesuai ketentuan produk.");
+  return;
+ }
+
+ cart.push({
+  name:p.name,
+  variant:option[0],
+  price:option[1],
+  qty:qty,
+  unit:p.unit,
+  note:note
+ });
+
+ renderCart();
+ alert("Pesanan ditambahkan ke keranjang!");
+}
+
+function renderCart(){
+ const area=document.getElementById("cartList");
+
+ if(cart.length===0){
+  area.innerHTML='<p class="empty">Keranjang masih kosong.</p>';
+ }else{
+  area.innerHTML=cart.map((item,i)=>`
+   <div class="cart-item">
+    <b>${item.name}</b><br>
+    ${item.variant}<br>
+    Jumlah: ${item.qty} ${item.unit}<br>
+    Catatan: ${item.note||"-"}<br>
+    Subtotal: <b>${rupiah(item.price*item.qty)}</b><br>
+    <button class="remove" onclick="removeItem(${i})">
+     Hapus pesanan
+    </button>
+   </div>
+  `).join("");
+ }
+
+ const total=cart.reduce((sum,item)=>
+  sum+item.price*item.qty,0);
+
+ document.getElementById("total").textContent=
+  "Total: "+rupiah(total);
+}
+
+function removeItem(i){
+ cart.splice(i,1);
+ renderCart();
+}
+
+function checkout(event){
+ event.preventDefault();
+
+ if(cart.length===0){
+  alert("Keranjang kamu masih kosong.");
+  return;
+ }
+
+ let total=0;
+ let message="Halo Sienada Cakery! Saya ingin memesan:\\n\\n";
+
+ cart.forEach((item,i)=>{
+  const subtotal=item.price*item.qty;
+  total+=subtotal;
+  message+=(i+1)+". "+item.name+"\\n";
+  message+=item.variant+"\\n";
+  message+="Jumlah: "+item.qty+" "+item.unit+"\\n";
+  message+="Catatan: "+(item.note||"-")+"\\n";
+  message+="Subtotal: "+rupiah(subtotal)+"\\n\\n";
+ });
+
+ message+="TOTAL: "+rupiah(total);
+ message+="\\n\\nMohon informasi ketersediaan dan cara pengambilannya. Terima kasih!";
+
+ window.open(
+  "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(message),
+  "_blank"
+ );
+}
+
+showProducts();
+renderCart();
+</script>
+
+</body>
+</html>
